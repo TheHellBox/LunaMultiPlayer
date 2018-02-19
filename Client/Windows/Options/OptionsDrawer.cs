@@ -27,7 +27,7 @@ namespace LunaClient.Windows.Options
             GUILayout.BeginVertical();
             GUI.DragWindow(MoveRect);
             GUILayout.BeginHorizontal();
-            GUILayout.Label("Player Name color: ");
+			GUILayout.Label(LunaClient.Windows.Langs.PlayerNameColor);
             GUILayout.Label(SettingsSystem.CurrentSettings.PlayerName, TempColorLabelStyle);
             GUILayout.EndHorizontal();
             GUILayout.BeginHorizontal();
@@ -45,9 +45,9 @@ namespace LunaClient.Windows.Options
             TempColorLabelStyle.active.textColor = TempColor;
             TempColorLabelStyle.normal.textColor = TempColor;
             GUILayout.BeginHorizontal();
-            if (GUILayout.Button("Random", ButtonStyle))
+			if (GUILayout.Button(LunaClient.Windows.Langs.Random, ButtonStyle))
                 TempColor = PlayerColorSystem.GenerateRandomColor();
-            if (GUILayout.Button("Set", ButtonStyle))
+			if (GUILayout.Button(LunaClient.Windows.Langs.Set, ButtonStyle))
             {
                 WindowsContainer.Get<StatusWindow>().ColorEventHandled = false;
                 SettingsSystem.CurrentSettings.PlayerColor = TempColor;
@@ -95,13 +95,23 @@ namespace LunaClient.Windows.Options
             }
             GUILayout.Space(10);
             GUILayout.BeginVertical();
-            GUILayout.Label("Positioning system:");
+			GUILayout.Label(LunaClient.Windows.Langs.PositioningSystem);
             var positionSetting = GUILayout.SelectionGrid(SettingsSystem.CurrentSettings.PositionSystem, new[] { "Dark", "Dagger", "Mixed" }, 3, "toggle");
             if (positionSetting != SettingsSystem.CurrentSettings.PositionSystem)
             {
                 SettingsSystem.CurrentSettings.PositionSystem = positionSetting;
                 SettingsSystem.SaveSettings();
             }
+
+			GUILayout.Label("Language:");
+			var langSetting = GUILayout.SelectionGrid(SettingsSystem.CurrentSettings.Lang, new[] { "English", "Русский" }, 1, "toggle");
+			if (langSetting != SettingsSystem.CurrentSettings.Lang)
+			{
+				SettingsSystem.CurrentSettings.Lang = langSetting;
+				LunaClient.Windows.Langs.UpdateLang();
+				SettingsSystem.SaveSettings();
+			}
+
             GUILayout.EndVertical();
             GUILayout.Space(10);
             GUILayout.Label("Generate a server LMPModControl:");
