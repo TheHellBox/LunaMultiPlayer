@@ -29,7 +29,7 @@ namespace LunaClient.Systems.SettingsSys
         public bool CloseBtnInConnectionWindow { get; set; } = true;
         public int MaxGroupsPerPlayer { get; set; } = 1;
         public int PositionSystem { get; set; } = 2;
-
+		public int Lang { get; set; } = 2;
 #if DEBUG
 
         /*
